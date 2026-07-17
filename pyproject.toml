@@ -67,6 +67,7 @@ install_types = true
 non_interactive = true
 ignore_missing_imports = true
 show_column_numbers = true
+packages = ["sekoia_automation_models"]
 exclude = [
     "tests/",
 ]

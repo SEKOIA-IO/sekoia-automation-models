@@ -17,8 +17,8 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python-version }}
-      - run: uv sync --dev
-      - run: uv run ruff check .
+      - run: uv sync --all-groups
+      - run: uv run ruff check --no-fix .
       - run: uv run ruff format --check .
       - run: uv run mypy
       - run: uv run pytest
