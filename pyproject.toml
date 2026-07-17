@@ -1,0 +1,74 @@
+[project]
+name = "sekoia-automation-models"
+version = "1.0.0"
+description = "Standalone Pydantic models (OCSF asset-connector) shared across Sekoia services and the `sekoia-automation-sdk`"
+readme = "README.md"
+requires-python = ">=3.11,<4"
+license = "MIT"
+authors = [{ name = "SEKOIA.IO" }]
+dependencies = [
+    "pydantic (>=2.10,<3.0.0)",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.urls]
+Homepage = "https://sekoia.io/"
+Repository = "https://github.com/SEKOIA-IO/sekoia-automation-models"
+Documentation = "https://docs.sekoia.io/"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.3,<10",
+    "pytest-cov",
+]
+lint = [
+    "ruff>=0.14",
+    "mypy",
+]
+
+[tool.uv]
+default-groups = [
+    "dev",
+    "lint",
+]
+
+[tool.hatch.build.targets.sdist]
+include = ["sekoia_automation_models"]
+
+[tool.hatch.build.targets.wheel]
+include = ["sekoia_automation_models"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+target-version = "py311"
+fix = true
+
+[tool.ruff.lint]
+select = ["A", "ARG", "E", "F", "I", "N", "RUF", "UP", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["ARG"]  # Ignore unused args because of pytest fixtures
+
+[tool.ruff.lint.flake8-builtins]
+ignorelist = ["print"]
+
+[tool.mypy]
+python_version = "3.11"
+install_types = true
+non_interactive = true
+ignore_missing_imports = true
+show_column_numbers = true
+packages = ["sekoia_automation_models"]
+exclude = [
+    "tests/",
+]
+disable_error_code = "annotation-unchecked"
