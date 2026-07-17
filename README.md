@@ -1,6 +1,6 @@
 # sekoia-automation-models
 
-Standalone pydantic models shared across SEKOIA.IO services and the automation SDK.
+Standalone Pydantic models shared across Sekoia services and the `sekoia-automation-sdk`.
 
 The package currently exposes the OCSF asset-connector models under
 `sekoia_automation_models.ocsf`. Its only runtime dependency is `pydantic`, so
