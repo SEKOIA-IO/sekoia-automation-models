@@ -39,4 +39,4 @@ class AssetList(BaseModel):
     """
 
     version: int
-    items: list[AssetItem] = []
+    items: list[AssetItem] = Field(default_factory=list)
