@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0]
+
+### Added
+
+- `connector` module with the asset-connector models (`AssetItem`, `AssetList`, `DefaultAssetConnectorConfiguration`) extracted from `sekoia-automation-sdk`.
+
 ## [1.0.0]
 
 ### Added
