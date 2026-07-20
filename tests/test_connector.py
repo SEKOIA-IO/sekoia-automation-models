@@ -1,3 +1,5 @@
+from typing import get_args
+
 from sekoia_automation_models.connector import (
     AssetItem,
     AssetList,
