@@ -22,6 +22,7 @@ class UserDataObject(BaseModel):
     bad_password_count: int | None = None
     number_of_logons: int | None = None
     last_time_password_change: float | None = None
+    external_device: str | None = None
 
 
 class UserEnrichmentObject(BaseModel):
@@ -104,6 +105,21 @@ class Account(BaseModel):
     uid: str | None = None
 
 
+class LdapPerson(BaseModel):
+    """
+    LdapPerson model represents the LDAP/directory attributes of a person.
+    Canonical OCSF home for identity attributes such as job title and department.
+    https://schema.ocsf.io/1.6.0/objects/ldap_person
+    """
+
+    job_title: str | None = None
+    department: str | None = None
+    employee_uid: str | None = None
+    given_name: str | None = None
+    surname: str | None = None
+    office_location: str | None = None
+
+
 class User(BaseModel):
     has_mfa: bool | None = None
     name: str
@@ -122,6 +138,7 @@ class User(BaseModel):
     type: UserTypeStr | None = None
     uid_alt: str | None = None
     org: Organization | None = None
+    ldap_person: LdapPerson | None = None
 
 
 class UserOCSFModel(OCSFBaseModel):
