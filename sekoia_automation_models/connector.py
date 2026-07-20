@@ -32,10 +32,10 @@ class AssetList(BaseModel):
     AssetList model for OCSF.
     This model is used to represent a list of assets collected by an asset connector.
     Attributes:
-        version (int): The OCSF schema version. ( Sekoia version )
+        version (int): The OCSF schema version. (Sekoia version)
         items (list): A list of asset objects, which can be of various types including
                       VulnerabilityOCSFModel, DeviceOCSFModel,
-                      UserOCSFModel, SoftwareOCSFModel, or AssetObject.
+                      UserOCSFModel, SoftwareOCSFModel.
     """
 
     version: int
