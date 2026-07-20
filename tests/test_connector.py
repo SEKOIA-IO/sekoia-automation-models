@@ -10,7 +10,7 @@ from sekoia_automation_models.ocsf.vulnerability import VulnerabilityOCSFModel
 
 
 def test_asset_item_unions_the_ocsf_models():
-    assert set(AssetItem.__args__) == {
+    assert set(get_args(AssetItem)) == {
         VulnerabilityOCSFModel,
         DeviceOCSFModel,
         UserOCSFModel,
