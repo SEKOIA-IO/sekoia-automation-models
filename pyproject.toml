@@ -1,6 +1,6 @@
 [project]
 name = "sekoia-automation-models"
-version = "1.1.0"
+version = "1.2.0"
 description = "Standalone Pydantic models (OCSF asset-connector) shared across Sekoia services and the `sekoia-automation-sdk`"
 readme = "README.md"
 requires-python = ">=3.11,<4"
