@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `connector` module with the asset-connector models (`AssetItem`, `AssetList`, `DefaultAssetConnectorConfiguration`) extracted from `sekoia-automation-sdk`.
-- Improve ocsf models ( `User`, `Vulnerability`) with new fields.
+- Improved OCSF models (`User`, `Vulnerability`) with new fields.
 
 ## [1.0.0]
 
