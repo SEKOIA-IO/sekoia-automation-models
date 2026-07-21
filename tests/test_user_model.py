@@ -97,7 +97,11 @@ def test_user_type_str_values():
 
 
 def test_account_required_fields():
-    account = Account(name="john@example.com", type_id=AccountTypeId.LDAP_ACCOUNT, type=AccountTypeStr.LDAP_ACCOUNT)
+    account = Account(
+        name="john@example.com",
+        type_id=AccountTypeId.LDAP_ACCOUNT,
+        type=AccountTypeStr.LDAP_ACCOUNT,
+    )
     assert account.name == "john@example.com"
     assert account.type_id == AccountTypeId.LDAP_ACCOUNT
     assert account.type == AccountTypeStr.LDAP_ACCOUNT
@@ -177,7 +181,12 @@ def test_user_with_all_fields():
         name="john.doe@example.com",
         uid="uid-3",
         has_mfa=True,
-        account=Account(name="john@corp.com", type_id=AccountTypeId.LDAP_ACCOUNT, type=AccountTypeStr.LDAP_ACCOUNT, uid="acc-1"),
+        account=Account(
+            name="john@corp.com",
+            type_id=AccountTypeId.LDAP_ACCOUNT,
+            type=AccountTypeStr.LDAP_ACCOUNT,
+            uid="acc-1",
+        ),
         groups=[Group(name="admins", uid="grp-1")],
         full_name="John Doe",
         email_addr="john.doe@example.com",
@@ -286,7 +295,11 @@ def _base_user_ocsf_payload() -> dict:
         "type_uid": 500201,
         "time": 1700000000.0,
         "metadata": {
-            "product": {"name": "TestProduct", "vendor_name": "TestCorp", "version": "1.0"},
+            "product": {
+                "name": "TestProduct",
+                "vendor_name": "TestCorp",
+                "version": "1.0",
+            },
             "version": "1.5.0",
         },
         "user": {"name": "john.doe@example.com", "uid": "uid-1"},
@@ -303,7 +316,11 @@ def test_user_ocsf_model_minimal():
 def test_user_ocsf_model_with_enrichments():
     payload = _base_user_ocsf_payload()
     payload["enrichments"] = [
-        {"name": "logon_info", "value": "active", "data": {"is_enabled": True, "number_of_logons": 5}}
+        {
+            "name": "logon_info",
+            "value": "active",
+            "data": {"is_enabled": True, "number_of_logons": 5},
+        }
     ]
     model = UserOCSFModel.model_validate(payload)
     assert model.enrichments is not None
@@ -370,6 +387,11 @@ def test_user_risk_level_all_enum_values():
         (RiskLevelStr.CRITICAL, RiskLevelId.CRITICAL),
         (RiskLevelStr.OTHER, RiskLevelId.OTHER),
     ]:
-        user = User(name="jane@example.com", uid="uid-enum", risk_level=level_str, risk_level_id=level_id)
+        user = User(
+            name="jane@example.com",
+            uid="uid-enum",
+            risk_level=level_str,
+            risk_level_id=level_id,
+        )
         assert user.risk_level == level_str
         assert user.risk_level_id == level_id
