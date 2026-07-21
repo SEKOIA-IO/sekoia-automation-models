@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0]
+
+### Added
+
+- Improve ocsf models ( `User`, `Vulnerability`) with new fields.
+- Add unit test to validate the models ( `User`, `Vulnerability`).
+
 ## [1.1.0]
 
 ### Added
