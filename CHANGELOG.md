@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0]
+
+### Added
+
+- Update `VulnerabilityOCSFModel` to OCSF 1.9.0
+- Regenerate `.github/schemas/VulnerabilityOCSFModel.json` to reflect all model changes.
+
+### Changed
+
+- `CVSS.base_score` is now a required field (was previously optional).
+
 ## [1.2.0]
 
 ### Added
