@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [1.5.0]
+
+### Changed
+
+- Update `VulnerabilityOCSFModel` to OCSF 1.9.0
+- Regenerate `.github/schemas/VulnerabilityOCSFModel.json` to reflect all model changes.
+
 ## [1.4.0]
 
 ### Added
