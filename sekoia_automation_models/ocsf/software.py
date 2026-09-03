@@ -236,6 +236,7 @@ class SoftwareEnrichmentObject(BaseModel):
     uid: str | None = None
     name: str | None = None
     version: str | None = None
+    purl: str | None = None
 
     vendor_name: str | None = None
 
@@ -268,6 +269,7 @@ class SoftwarePackage(BaseModel):
     version: str
     uid: str | None = None
     cpe_name: str | None = None
+    purl: str | None = None
     license: str | None = None
     license_url: str | None = None
     release: str | None = None
