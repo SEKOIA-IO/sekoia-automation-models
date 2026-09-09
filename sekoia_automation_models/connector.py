@@ -20,12 +20,15 @@ class DefaultAssetConnectorConfiguration(BaseModel):
         sekoia_api_key (str): The API key for authentication with the Sekoia.io API.
         frequency (int): The frequency in seconds at which the connector should run.
         batch_size (int): The maximum number of assets to send per batch.
+        max_assets_per_cycle (int): The maximum number of assets processed in a single
+            cycle before resuming from the checkpoint. 0 means unlimited.
     """
 
     sekoia_base_url: str | None
     sekoia_api_key: str
     frequency: int = 10800  # 3 hours
     batch_size: int = 100
+    max_assets_per_cycle: int = 0
 
 
 class AssetList(BaseModel):
