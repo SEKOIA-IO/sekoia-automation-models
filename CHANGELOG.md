@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `max_assets_per_cycle` on `DefaultAssetConnectorConfiguration`: caps the number of assets an asset connector processes in a single cycle, resuming from the checkpoint on the next one. `0` (the default) keeps the current unlimited behaviour.
+
 ## [1.3.0]
 
 ### Added
