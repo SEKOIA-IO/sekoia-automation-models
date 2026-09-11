@@ -253,6 +253,7 @@ class SoftwareEnrichmentObject(BaseModel):
     binary_name: str | None = None
     architecture: str | None = None
     last_user_name: str | None = None
+    last_used_file_name: str | None = None
 
 
 class SoftwarePackage(BaseModel):

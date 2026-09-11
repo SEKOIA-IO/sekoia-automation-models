@@ -46,3 +46,16 @@ def test_software_objects_carry_a_purl():
     package = SoftwarePackage(name="vim", version="9.0", purl="pkg:deb/ubuntu/vim@9.0")
     assert package.purl == "pkg:deb/ubuntu/vim@9.0"
     assert SoftwarePackage(name="vim", version="9.0").purl is None
+
+
+def test_software_enrichment_object_carries_the_last_used_file_name():
+    obj = SoftwareEnrichmentObject.model_validate(
+        {
+            "name": "Firefox",
+            "last_used_file_name": "firefox",
+            "hashes": [{"algorithm": "SHA-256", "algorithm_id": 3, "value": "abc"}],
+        }
+    )
+    assert obj.last_used_file_name == "firefox"
+    assert obj.hashes[0].value == "abc"
+    assert SoftwareEnrichmentObject(name="Firefox").last_used_file_name is None
