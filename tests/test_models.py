@@ -4,6 +4,7 @@ from sekoia_automation_models.ocsf.software import (
     FingerprintAlgorithmId,
     FingerprintAlgorithmStr,
     SoftwareEnrichmentObject,
+    SoftwarePackage,
 )
 
 
@@ -35,3 +36,13 @@ def test_software_enrichment_object_nests_os():
 def test_public_schema_is_generatable():
     # Guards against unresolved forward references across the vendored modules
     SoftwareEnrichmentObject.model_json_schema()
+
+
+def test_software_objects_carry_a_purl():
+    obj = SoftwareEnrichmentObject.model_validate(
+        {"name": "vim", "version": "9.0", "purl": "pkg:deb/ubuntu/vim@9.0?arch=amd64"}
+    )
+    assert obj.purl == "pkg:deb/ubuntu/vim@9.0?arch=amd64"
+    package = SoftwarePackage(name="vim", version="9.0", purl="pkg:deb/ubuntu/vim@9.0")
+    assert package.purl == "pkg:deb/ubuntu/vim@9.0"
+    assert SoftwarePackage(name="vim", version="9.0").purl is None

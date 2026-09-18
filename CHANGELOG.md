@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add `batch_push_interval` field to `DefaultAssetConnectorConfiguration` to control the delay between batch pushes.
+## [1.3.0]
+
+### Added
+
+- `purl` (Package URL) on `SoftwarePackage`, as in the OCSF `package` object, and on `SoftwareEnrichmentObject` so the endpoint agent can report it.
 
 ## [1.2.0]
 
