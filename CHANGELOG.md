@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `batch_push_interval` field to `DefaultAssetConnectorConfiguration` to control the delay between batch pushes.
+
 ## [1.2.0]
 
 ### Added
