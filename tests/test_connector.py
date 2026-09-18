@@ -32,3 +32,11 @@ def test_default_configuration_applies_defaults():
     )
     assert config.frequency == 10800
     assert config.batch_size == 100
+    assert config.batch_push_interval == 0.0
+
+
+def test_default_configuration_accepts_custom_batch_push_interval():
+    config = DefaultAssetConnectorConfiguration(
+        sekoia_base_url=None, sekoia_api_key="key", batch_push_interval=2.5
+    )
+    assert config.batch_push_interval == 2.5
