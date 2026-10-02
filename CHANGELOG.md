@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `max_assets_per_cycle` to `DefaultAssetConnectorConfiguration` so asset connectors can declare a per-cycle asset cap. `0` (the default) declares an unlimited cap; enforcement requires SDK support.
+
 ## [1.3.0]
 
 ### Added
