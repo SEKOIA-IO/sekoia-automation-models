@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.4.0]
-
 ### Added
 
 - `last_used_file_name` on `SoftwareEnrichmentObject`: the name of the application's binary that ran last, reported by the endpoint agent together with its hashes.
