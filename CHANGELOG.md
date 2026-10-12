@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `batch_push_interval` to `DefaultAssetConnectorConfiguration` to configure the delay between consecutive asset batch pushes; it defaults to `0` (no delay).
 - Add `max_assets_per_cycle` to `DefaultAssetConnectorConfiguration` so asset connectors can declare a per-cycle asset cap. `0` (the default) declares an unlimited cap; enforcement requires SDK support.
+- `last_used_file_name` on `SoftwareEnrichmentObject`: the name of the application's binary that ran last, reported by the endpoint agent together with its hashes.
 
 ## [1.3.0]
 
