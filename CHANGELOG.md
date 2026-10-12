@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+# [1.5.0]
+
+### Changed
+
+- Update `VulnerabilityOCSFModel` to OCSF 1.9.0
+- Restrict `severity_id`, `action_id`, `disposition_id`, `status_id`, `CVSS.depth`, `fix_coverage_id`, `OSINT.type_id`, `OSINT.tlp` and `OSINT.severity_id` to their OCSF enum values.
+- Regenerate `.github/schemas/VulnerabilityOCSFModel.json` to reflect all model changes.
+
 ## [1.4.0]
 
 ### Added

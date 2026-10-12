@@ -13,7 +13,7 @@ JSON schemas stored in `.github/schemas/`. The three top-level models are:
 
 | Model | Schema file | OCSF reference                                             |
 |---|---|------------------------------------------------------------|
-| `VulnerabilityOCSFModel` | `.github/schemas/VulnerabilityOCSFModel.json` | https://schema.ocsf.io/1.8.0/classes/vulnerability_finding |
+| `VulnerabilityOCSFModel` | `.github/schemas/VulnerabilityOCSFModel.json` | https://schema.ocsf.io/1.9.0/classes/vulnerability_finding |
 | `UserOCSFModel` | `.github/schemas/UserOCSFModel.json` | https://schema.ocsf.io/1.8.0/classes/user_inventory        |
 | `DeviceOCSFModel` | `.github/schemas/DeviceOCSFModel.json` | https://schema.ocsf.io/1.8.0/classes/device_inventory_info |
 
