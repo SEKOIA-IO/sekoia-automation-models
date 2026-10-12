@@ -22,6 +22,8 @@ class DefaultAssetConnectorConfiguration(BaseModel):
         batch_size (int): The maximum number of assets to send per batch.
         batch_push_interval (float): The delay in seconds to wait between two
             consecutive batch pushes.
+        max_assets_per_cycle (int): The maximum number of assets processed in a single
+            cycle before resuming from the checkpoint. 0 means unlimited.
     """
 
     sekoia_base_url: str | None
@@ -29,6 +31,7 @@ class DefaultAssetConnectorConfiguration(BaseModel):
     frequency: int = 10800  # 3 hours
     batch_size: int = 100
     batch_push_interval: float = Field(default=0.0, ge=0)
+    max_assets_per_cycle: int = Field(default=0, ge=0)
 
 
 class AssetList(BaseModel):
