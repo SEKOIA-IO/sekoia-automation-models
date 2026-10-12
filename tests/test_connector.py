@@ -1,5 +1,8 @@
 from typing import get_args
 
+import pytest
+from pydantic import ValidationError
+
 from sekoia_automation_models.connector import (
     AssetItem,
     AssetList,
@@ -32,3 +35,18 @@ def test_default_configuration_applies_defaults():
     )
     assert config.frequency == 10800
     assert config.batch_size == 100
+    assert config.batch_push_interval == 0.0
+
+
+def test_default_configuration_accepts_custom_batch_push_interval():
+    config = DefaultAssetConnectorConfiguration(
+        sekoia_base_url=None, sekoia_api_key="key", batch_push_interval=2.5
+    )
+    assert config.batch_push_interval == 2.5
+
+
+def test_default_configuration_refuses_negative_batch_push_interval():
+    with pytest.raises(ValidationError):
+        DefaultAssetConnectorConfiguration(
+            sekoia_base_url=None, sekoia_api_key="key", batch_push_interval=-1.0
+        )
