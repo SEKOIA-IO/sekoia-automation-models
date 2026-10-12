@@ -36,6 +36,7 @@ def test_default_configuration_applies_defaults():
     assert config.frequency == 10800
     assert config.batch_size == 100
     assert config.batch_push_interval == 0.0
+    assert config.max_assets_per_cycle == 0
 
 
 def test_default_configuration_accepts_custom_batch_push_interval():
@@ -49,4 +50,18 @@ def test_default_configuration_refuses_negative_batch_push_interval():
     with pytest.raises(ValidationError):
         DefaultAssetConnectorConfiguration(
             sekoia_base_url=None, sekoia_api_key="key", batch_push_interval=-1.0
+        )
+
+
+def test_default_configuration_accepts_custom_max_assets_per_cycle():
+    config = DefaultAssetConnectorConfiguration(
+        sekoia_base_url=None, sekoia_api_key="key", max_assets_per_cycle=500
+    )
+    assert config.max_assets_per_cycle == 500
+
+
+def test_default_configuration_refuses_negative_max_assets_per_cycle():
+    with pytest.raises(ValidationError):
+        DefaultAssetConnectorConfiguration(
+            sekoia_base_url=None, sekoia_api_key="key", max_assets_per_cycle=-1
         )
