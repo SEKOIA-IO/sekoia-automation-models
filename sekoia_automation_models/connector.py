@@ -28,7 +28,7 @@ class DefaultAssetConnectorConfiguration(BaseModel):
     sekoia_api_key: str
     frequency: int = 10800  # 3 hours
     batch_size: int = 100
-    batch_push_interval: float = 0.0
+    batch_push_interval: float = Field(default=0.0, ge=0)
 
 
 class AssetList(BaseModel):
