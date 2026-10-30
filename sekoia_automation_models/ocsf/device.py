@@ -129,7 +129,7 @@ class Device(BaseModel):
     uid: str
     location: GeoLocation | None = None
     os: OperatingSystem | None = None
-    hostname: str
+    hostname: str | None = None
     autoscale_uid: str | None = None
     boot_time: float | None = None
     boot_uid: str | None = None
