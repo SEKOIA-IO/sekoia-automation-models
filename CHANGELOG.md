@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `split_hostname` returns the `(hostname, domain)` pair the asset management API accepts: a fully qualified name is split on its first label, an unusable name gives `(None, None)`.
+
+### Changed
+
+- `Device.hostname` is optional: a device without usable hostname is sent without one, as the asset management API accepts.
+
 ## [1.4.0]
 
 ### Added
