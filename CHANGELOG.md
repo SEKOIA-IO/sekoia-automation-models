@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `split_hostname` returns the `(hostname, domain)` pair the asset management API accepts: a fully qualified name is split on its first label, an unusable name gives `(None, None)`.
+
 ## [1.4.0]
 
 ### Added
