@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `normalize_sid` returns the SID of a domain account or an Entra ID object in upper case, and `None` for a placeholder, a GUID, a well-known SID or a built-in account, so connectors and the asset management API keep the same SIDs.
+
 ## [1.5.0]
 
 ### Added
