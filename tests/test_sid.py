@@ -49,6 +49,12 @@ def test_normalize_sid_keeps_an_account_sid(value, expected):
         "S-1-5-21-4294967296-3354019915-535386580-1662",
         "S-1-12-1-1234567890-1098765432-2345678901",
         "user@example.com",
+        # Non-ASCII digits
+        "S-1-5-21-\u0661-2-3-1000",
+        "S-1-12-1-\u0661-2-3-4",
+        # Parts too long to be a sub-authority, however many digits
+        "S-1-5-21-1-2-3-" + "9" * 5000,
+        "S-1-12-1-" + "9" * 5000 + "-2-3-4",
     ],
 )
 def test_normalize_sid_rejects_anything_else(value):

@@ -1,7 +1,9 @@
 import re
 
-_DOMAIN_ACCOUNT_SID = re.compile(r"S-1-5-21-(\d+)-(\d+)-(\d+)-(\d+)")
-_ENTRA_SID = re.compile(r"S-1-12-1-(\d+)-(\d+)-(\d+)-(\d+)")
+# ASCII digits only, and no more than 2**32 - 1 needs
+_PART = r"([0-9]{1,10})"
+_DOMAIN_ACCOUNT_SID = re.compile(rf"S-1-5-21-{_PART}-{_PART}-{_PART}-{_PART}")
+_ENTRA_SID = re.compile(rf"S-1-12-1-{_PART}-{_PART}-{_PART}-{_PART}")
 
 _MAX_SUB_AUTHORITY = 2**32 - 1
 # Below 1000, the relative ID names a built-in account or group (500 Administrator,
