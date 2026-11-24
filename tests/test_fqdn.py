@@ -12,6 +12,13 @@ from sekoia_automation_models.hostname import build_fqdn
         ("ws-01.corp.example.fr.", "corp.example.fr", "ws-01.corp.example.fr"),
         ("ws-01", "corp.local", "ws-01.corp.local"),
         ("café", "corp.example.fr", "xn--caf-dma.corp.example.fr"),
+        ("ws.xn--caf-dma.fr", "café.fr", "ws.xn--caf-dma.fr"),
+        ("ws.café.fr", "xn--caf-dma.fr", "ws.xn--caf-dma.fr"),
+        (
+            "a" * 63,
+            ".".join(["b" * 63, "c" * 63, "d" * 61]),
+            f"{'a' * 63}.{'b' * 63}.{'c' * 63}.{'d' * 61}",
+        ),
     ],
 )
 def test_build_fqdn(hostname, domain, expected):
@@ -32,6 +39,11 @@ def test_build_fqdn(hostname, domain, expected):
         ("srv_01", "corp.example.fr"),
         ("ws 01", "corp.example.fr"),
         ("a" * 64, "corp.example.fr"),
+        ("-ws", "corp.example.fr"),
+        ("ws-", "corp.example.fr"),
+        ("ws", "corp-.example.fr"),
+        ("ws", "corp.-example.fr"),
+        ("a" * 63, ".".join(["b" * 63, "c" * 63, "d" * 62])),
     ],
 )
 def test_build_fqdn_unreliable(hostname, domain):

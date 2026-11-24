@@ -38,11 +38,18 @@ def split_hostname(value: str | None) -> tuple[str | None, str | None]:
     return name, domain or None
 
 
-FQDN_REGEX = re.compile(rb"[a-z0-9-]+(\.[a-z0-9-]+)+")
+_LABEL = rb"[a-z0-9]([a-z0-9-]*[a-z0-9])?"
+FQDN_REGEX = re.compile(rb"%s(\.%s)+" % (_LABEL, _LABEL))
+_MAX_FQDN_LENGTH = 253
 
 
-def _fqdn_part(value: str | None) -> str:
-    return (value or "").strip().lower().rstrip(".")
+def _fqdn_part(value: str | None) -> str | None:
+    """The part in lower case, without spaces or trailing dot, in IDNA (`xn--`) form"""
+    part = (value or "").strip().lower().rstrip(".")
+    try:
+        return part.encode("idna").decode()
+    except UnicodeError:
+        return None
 
 
 def build_fqdn(hostname: str | None, domain: str | None) -> str | None:
@@ -56,7 +63,7 @@ def build_fqdn(hostname: str | None, domain: str | None) -> str | None:
     name is returned in its IDNA (`xn--`) form.
     """
     host, dom = _fqdn_part(hostname), _fqdn_part(domain)
-    if not host or "." not in dom:
+    if not host or not dom or "." not in dom:
         return None
 
     if host.endswith(f".{dom}"):
@@ -66,10 +73,6 @@ def build_fqdn(hostname: str | None, domain: str | None) -> str | None:
     else:
         fqdn = f"{host}.{dom}"
 
-    try:
-        encoded = fqdn.encode("idna")
-    except UnicodeError:
+    if len(fqdn) > _MAX_FQDN_LENGTH or not FQDN_REGEX.fullmatch(fqdn.encode()):
         return None
-    if not FQDN_REGEX.fullmatch(encoded):
-        return None
-    return encoded.decode()
+    return fqdn
