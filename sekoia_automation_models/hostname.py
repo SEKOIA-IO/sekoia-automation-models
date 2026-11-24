@@ -36,3 +36,40 @@ def split_hostname(value: str | None) -> tuple[str | None, str | None]:
         return None, None
 
     return name, domain or None
+
+
+FQDN_REGEX = re.compile(rb"[a-z0-9-]+(\.[a-z0-9-]+)+")
+
+
+def _fqdn_part(value: str | None) -> str:
+    return (value or "").strip().lower().rstrip(".")
+
+
+def build_fqdn(hostname: str | None, domain: str | None) -> str | None:
+    """
+    Return the fully qualified name of a device from its hostname and domain.
+
+    The name is in lower case, and a hostname that already ends with the domain is kept
+    as it is. Returns `None` when no reliable FQDN can be built: a missing part, a
+    NetBIOS domain (no dot, such as `CORP`), a hostname qualified with another domain,
+    or a name that is not a valid DNS name. The caller leaves the FQDN out. A non-ASCII
+    name is returned in its IDNA (`xn--`) form.
+    """
+    host, dom = _fqdn_part(hostname), _fqdn_part(domain)
+    if not host or "." not in dom:
+        return None
+
+    if host.endswith(f".{dom}"):
+        fqdn = host
+    elif "." in host:
+        return None
+    else:
+        fqdn = f"{host}.{dom}"
+
+    try:
+        encoded = fqdn.encode("idna")
+    except UnicodeError:
+        return None
+    if not FQDN_REGEX.fullmatch(encoded):
+        return None
+    return encoded.decode()
