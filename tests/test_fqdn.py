@@ -39,6 +39,8 @@ def test_build_fqdn(hostname, domain, expected):
         ("srv_01", "corp.example.fr"),
         ("ws 01", "corp.example.fr"),
         ("a" * 64, "corp.example.fr"),
+        ("ws-01..", "corp.example.fr"),
+        ("ws-01", "corp.example.fr.."),
         ("-ws", "corp.example.fr"),
         ("ws-", "corp.example.fr"),
         ("ws", "corp-.example.fr"),

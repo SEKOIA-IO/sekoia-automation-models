@@ -45,7 +45,7 @@ _MAX_FQDN_LENGTH = 253
 
 def _fqdn_part(value: str | None) -> str | None:
     """The part in lower case, without spaces or trailing dot, in IDNA (`xn--`) form"""
-    part = (value or "").strip().lower().rstrip(".")
+    part = (value or "").strip().lower().removesuffix(".")
     try:
         return part.encode("idna").decode()
     except UnicodeError:
