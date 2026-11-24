@@ -36,3 +36,43 @@ def split_hostname(value: str | None) -> tuple[str | None, str | None]:
         return None, None
 
     return name, domain or None
+
+
+_LABEL = rb"[a-z0-9]([a-z0-9-]*[a-z0-9])?"
+FQDN_REGEX = re.compile(rb"%s(\.%s)+" % (_LABEL, _LABEL))
+_MAX_FQDN_LENGTH = 253
+
+
+def _fqdn_part(value: str | None) -> str | None:
+    """The part in lower case, without spaces or trailing dot, in IDNA (`xn--`) form"""
+    part = (value or "").strip().lower().removesuffix(".")
+    try:
+        return part.encode("idna").decode()
+    except UnicodeError:
+        return None
+
+
+def build_fqdn(hostname: str | None, domain: str | None) -> str | None:
+    """
+    Return the fully qualified name of a device from its hostname and domain.
+
+    The name is in lower case, and a hostname that already ends with the domain is kept
+    as it is. Returns `None` when no reliable FQDN can be built: a missing part, a
+    NetBIOS domain (no dot, such as `CORP`), a hostname qualified with another domain,
+    or a name that is not a valid DNS name. The caller leaves the FQDN out. A non-ASCII
+    name is returned in its IDNA (`xn--`) form.
+    """
+    host, dom = _fqdn_part(hostname), _fqdn_part(domain)
+    if not host or not dom or "." not in dom:
+        return None
+
+    if host.endswith(f".{dom}"):
+        fqdn = host
+    elif "." in host:
+        return None
+    else:
+        fqdn = f"{host}.{dom}"
+
+    if len(fqdn) > _MAX_FQDN_LENGTH or not FQDN_REGEX.fullmatch(fqdn.encode()):
+        return None
+    return fqdn
