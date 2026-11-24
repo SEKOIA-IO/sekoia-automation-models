@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0]
+
 ### Added
 
 - `build_fqdn` returns the FQDN of a device from its hostname and domain in lower case, keeps a hostname that already ends with the domain, and returns `None` for a NetBIOS domain, a hostname qualified with another domain or an invalid name, so connectors and the asset management API build the same FQDN.
