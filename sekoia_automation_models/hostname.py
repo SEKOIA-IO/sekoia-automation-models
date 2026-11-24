@@ -5,6 +5,9 @@ import tldextract
 HOSTNAME_REGEX = re.compile(rb"[a-z0-9-_.]+")
 LETTER_REGEX = re.compile(rb"[a-z]")
 
+# Names a product sends when it does not know the hostname, shared by unrelated devices
+PLACEHOLDER_HOSTNAMES = frozenset({"unknown", "localhost"})
+
 # Bundled public suffix list only: nothing is fetched at runtime
 _extract = tldextract.TLDExtract(
     suffix_list_urls=(), cache_dir=None, fallback_to_snapshot=True
@@ -16,7 +19,8 @@ def split_hostname(value: str | None) -> tuple[str | None, str | None]:
     Split a name into the `(hostname, domain)` pair the asset management API accepts.
 
     A fully qualified name is split on its first label. Returns `(None, None)` when no
-    usable hostname can be derived: the caller skips the device.
+    usable hostname can be derived, a placeholder such as `unknown` included: the caller
+    skips the device.
     """
     if not value:
         return None, None
@@ -33,6 +37,8 @@ def split_hostname(value: str | None) -> tuple[str | None, str | None]:
         return None, None
 
     if not HOSTNAME_REGEX.fullmatch(encoded) or not LETTER_REGEX.search(encoded):
+        return None, None
+    if name in PLACEHOLDER_HOSTNAMES:
         return None, None
 
     return name, domain or None
@@ -58,12 +64,14 @@ def build_fqdn(hostname: str | None, domain: str | None) -> str | None:
 
     The name is in lower case, and a hostname that already ends with the domain is kept
     as it is. Returns `None` when no reliable FQDN can be built: a missing part, a
-    NetBIOS domain (no dot, such as `CORP`), a hostname qualified with another domain,
-    or a name that is not a valid DNS name. The caller leaves the FQDN out. A non-ASCII
-    name is returned in its IDNA (`xn--`) form.
+    NetBIOS domain (no dot, such as `CORP`), a placeholder hostname such as `unknown`, a
+    hostname qualified with another domain, or a name that is not a valid DNS name. The
+    caller leaves the FQDN out. A non-ASCII name is returned in its IDNA (`xn--`) form.
     """
     host, dom = _fqdn_part(hostname), _fqdn_part(domain)
     if not host or not dom or "." not in dom:
+        return None
+    if host.partition(".")[0] in PLACEHOLDER_HOSTNAMES:
         return None
 
     if host.endswith(f".{dom}"):
