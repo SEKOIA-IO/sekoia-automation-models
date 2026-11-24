@@ -40,6 +40,8 @@ def test_build_fqdn(hostname, domain, expected):
         ("ws 01", "corp.example.fr"),
         ("a" * 64, "corp.example.fr"),
         ("ws-01..", "corp.example.fr"),
+        ("Unknown", "corp.example.fr"),
+        ("localhost.corp.example.fr", "corp.example.fr"),
         ("ws-01", "corp.example.fr.."),
         ("-ws", "corp.example.fr"),
         ("ws-", "corp.example.fr"),
