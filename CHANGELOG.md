@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0]
+
+### Added
+
+- `identifiers` module: `host_identifiers`, `account_identifiers`, `email_identifiers` and `sid_identifiers` write a raw value as the asset identifiers every source should agree on, in lower case and strongest first, and return nothing for a placeholder, a loopback name, an IP address, a machine or shared account or a well-known SID. A dotted host name gives its short name and its full name, whatever its suffix. The previous form of a value comes last, marked `legacy`, so assets stored under it are still found. `CATALOG` describes the five identifier types.
+
 ## [1.7.0]
 
 ### Added
